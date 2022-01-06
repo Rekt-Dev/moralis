@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="3600">
+    <title>Crypto Dashboard </title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com" rel="noopener" target="_blank"><span class="blue-text">Quotes</span></a> by TradingView</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+    {
+    "symbols": [
+      {
+        "proName": "FOREXCOM:SPXUSD",
+        "title": "S&P 500"
+      },
+      {
+        "proName": "FOREXCOM:NSXUSD",
+        "title": "US 100"
+      },
+      {
+        "proName": "FX_IDC:EURUSD",
+        "title": "EUR/USD"
+      },
+      {
+        "proName": "BITSTAMP:BTCUSD",
+        "title": "Bitcoin"
+      },
+      {
+        "proName": "BITSTAMP:ETHUSD",
+        "title": "Ethereum"
+      },
+    ],
+    "colorTheme": "dark",
+    "isTransparent": true,
+    "showSymbolLogo": true,
+    "locale": "en",
+    "autosize":true
+  }
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+    <h1 >Ofearz Crypto Dashboard </h1>
+    <div id = "current-btc-price" style='font-weight: bold; font-size: 18px;'>
+    </div>
+    
+   
+    <button id="btn-login"class="btn btn-secondary">Metamask Login</button>
+    <button id="btn-logout"class="btn btn-danger">Logout</button>
+    <button id="portfolio"class="btn btn-success">My Portfolio</button>
+    <button id="fiat"class="btn btn-info">My Fiat</button>
+    <button id="Trade History"class="btn btn-warning">Trade History</button>
+    <button id="watchlist"class="btn btn-dark">My Watchlist</button>
+    <button id="shortsLongs"class="btn btn-link">Shorts/Longs</button>
+
+    <button id="research"class="btn btn-secondary">Research</button>
+
+    <button id="options"class="btn btn-primary">Options</button>
+
+    <button id="trades">Strategies</button>
+
+
+   
+
+<div class = "myDiv">
+
+</div>
+<div id = "current-btc-marketcap"style='font-weight: bold; font-size: 18px;'>
+
+</div>
+<div id = "list">
+</div>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="9"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="10"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="11"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="12"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="13"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="14"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="15"></li>
+
+
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1591994843349-f415893b3a6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Yml0Y29pbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60" alt="First slide" 
+
+            <div class="absolute-div">
+                <div class="carousel-caption">
+                    <h3>Transitory they said...</h3>
+                </div>
+            </div>
+
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1518478164902-9e0290e8d7d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" alt="Second slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Censorship Free</h3>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1621739165914-7155e5d4816e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Third slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1622450348974-edae201b4593?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="Fourth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1613093987424-04f341be5600?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" alt="Fifth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1197&q=80" alt="Fourth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1198&q=80" alt="Fourth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1197&q=80" alt="Fourth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1605792657660-596af9009e82?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1402&q=80" alt="Ninth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Tenth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1468971050039-be99497410af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Eleventh slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Twelvth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Transitory they siad...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1197&q=80" alt="Fourth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3></h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1629788963668-f56064fc4d3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" alt="Fourteenth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Woof woof...</h3>
+            </div>
+        </div>
+      </div><div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1622102699291-b881675c58fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" alt="Fifteenth slide">
+        <div class="absolute-div">
+            <div class="carousel-caption">
+                <h3>Even toilethereum rekt legacy markets...</h3>
+            </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
+  </div>
+
+
+
+
+
+<div id = "balances" class="col-md-6 continer">
+<h2 color = "red"> Send crypto </h2>
+<form>
+    <div class="mb-3">
+      <input placeholder="amount to send"type="number" class="form-control" id="amountToSend" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <input placeholder="address to send to"type="any" class="form-control" id="rcvrAddress">
+    </div>
+    </div>
+    <button id = "sendFunds"type="submit" class="btn btn-primary">Send the Monies</button>
+  </form>
+</div>
+
+
+<div>
+  <br>
+<br>
+</div>
+
+
+
+
+  <select class="form-select" aria-label="Default select example">
+    <option selected>Choose a coin</option>
+    <option value="1">Matic</option>
+    <option value="2">Eos</option>
+    <option value="3">Ada</option>
+  </select>
+<div>
+  <br>
+
+</div>
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div id="tradingview_7e266"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/ETHUSD/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">Efferiums Chart</span></a> by Satoshi</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "autosize": true,
+    "symbol": "INDEX:ETHUSD",
+    "interval": "3",
+    "timezone": "Asia/Jerusalem",
+    "theme": "dark",
+    "style": "3",
+    "locale": "en",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "watchlist": [
+    "INDEX:BTCUSD",
+    "INDEX:ETHUSD",
+    "FTX:SOLUSD",
+    "BITMEX:EOSUSD",
+    "BINANCE:MATICUSD",
+    "FTX:MANAUSD",
+    "BITMEX:ADAUSD",
+    "BITMEX:DOGEUSDT",
+    "BITMEX:XRPUSD",
+    "BITMEX:LTCUSD",
+    "BITMEX:AVAXUSD",
+    "BITMEX:LINKUSD",
+    ],
+    "studies": [
+      "MASimple@tv-basicstudies"
+    ],
+    "show_popup_button": true,
+    "popup_width": "1000",
+    "popup_height": "650",
+    "container_id": "tradingview_7e266",
+    "autosize":true
+
+  }
+    );
+    </script>
+    <img src="https://alternative.me/crypto/fear-and-greed-index.png" alt="Latest Crypto Fear & Greed Index" width = 100% height = 100% align='middle' />
+  </div>
+  <!-- TradingView Widget END -->
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/cryptocurrencies/" rel="noopener" target="_blank"><span class="blue-text">Bitcoin and Shitcoin Prices</span></a> </div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+    {
+    "title": "Cryptocurrencies",
+    "title_raw": "Cryptocurrencies",
+    "title_link": "/markets/cryptocurrencies/prices-all/",
+    "width": 550,
+    "height": 550,
+    "locale": "en",
+    "showSymbolLogo": true,
+    "autosize":true,
+
+    "symbolsGroups": [
+      {
+        "name": "Overview",
+        "symbols": [
+          {
+            "name": "CRYPTOCAP:TOTAL"
+          },
+          {
+            "name": "BITSTAMP:BTCUSD"
+          },
+          {
+            "name": "BITSTAMP:ETHUSD"
+          },
+          {
+            "name": "FTX:SOLUSD"
+          },
+          {
+            "name": "BINANCE:LUNAUSD"
+          },
+          {
+            "name": "COINBASE:UNIUSD"
+          }
+        ]
+      },
+      {
+        "name": "Bitcoin",
+        "symbols": [
+          {
+            "name": "BITSTAMP:BTCUSD"
+          },
+          {
+            "name": "COINBASE:BTCEUR"
+          },
+          {
+            "name": "COINBASE:BTCGBP"
+          },
+          {
+            "name": "BITFLYER:BTCJPY"
+          },
+          {
+            "name": "CEXIO:BTCRUB"
+          },
+          {
+            "name": "CME:BTC1!"
+          }
+        ]
+      },
+      {
+        "name": "Ethereum",
+        "symbols": [
+          {
+            "name": "BITSTAMP:ETHUSD"
+          },
+          {
+            "name": "KRAKEN:ETHEUR"
+          },
+          {
+            "name": "COINBASE:ETHGBP"
+          },
+          {
+            "name": "BITFLYER:ETHJPY"
+          },
+          {
+            "name": "BINANCE:ETHBTC"
+          },
+          {
+            "name": "BINANCE:ETHUSDT"
+          }
+        ]
+      },
+      {
+        "name": "Solana",
+        "symbols": [
+          {
+            "name": "FTX:SOLUSD"
+          },
+          {
+            "name": "BINANCE:SOLEUR"
+          },
+          {
+            "name": "COINBASE:SOLGBP"
+          },
+          {
+            "name": "BINANCE:SOLBTC"
+          },
+          {
+            "name": "HUOBI:SOLETH"
+          },
+          {
+            "name": "BINANCE:SOLUSDT"
+          }
+        ]
+      },
+      {
+        "name": "Uniswap",
+        "symbols": [
+          {
+            "name": "COINBASE:UNIUSD"
+          },
+          {
+            "name": "KRAKEN:UNIEUR"
+          },
+          {
+            "name": "COINBASE:UNIGBP"
+          },
+          {
+            "name": "BINANCE:UNIBTC"
+          },
+          {
+            "name": "KRAKEN:UNIETH"
+          },
+          {
+            "name": "BINANCE:UNIUSDT"
+          }
+        ]
+      }
+    ],
+    "colorTheme": "dark"
+  }
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+
+  <div class="jumbotron">
+    <h1 class="display-4">Market analysis by our experts:</h1>
+    <p class="lead">SO whats up with the markets this week aye, December opened with a huge crash and not that it wasnt expected, it still was enormous.</p>
+    <hr class="my-4">
+    <p>DO you even lift bro ? 
+
+        I donno. 
+
+    </p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="https://rekt-dev.github.io"target="_blank" role="button">Learn more</a>
+    </p>
+  </div>
+
+<div id = "alternativeME">
+
+</div>
+
+
+<div id="content">
+</div>
+<div
+id = "wtaf">
+
+</div>
+<div id="metrics">
+<div>
+    <script type="text/javascript" src="./main.js"></script>
+
+
+    <script> 
+        document.getElementById("content").innerHTML='<object type="text/html" data="home.html" ></object>';
+    
+
+   
+const alternativeMe = fetch ('https://api.alternative.me/fng/?limit=0')
+console.log(` this is the updated fearNgreed + ${alternativeMe}`)
+window
+.fetch ("https://api.alternative.me/fng/?limit=10")
+.then (res=> res.json())
+//const resJson = res.json()
+//console.log(res.Json)
+.then(payload=>
+(document.getElementById("alternativeME").innerHTML =
+alternativeMe));
+
+
+// assuming you have a <div id='current-btc-price' style='font-weight: bold; font-size: 18px;'></div>
+window
+  .fetch("https://data.messari.io/api/v1/assets/btc/metrics/market-data")
+  .then(res => res.json())
+  .then(messariRes => messariRes.data)
+  .then(
+    payload =>
+      (document.getElementById("current-btc-price").innerHTML = 
+        'The price of bitcoin is: $' + payload.market_data.price_usd.toLocaleString())
+  );
+  fetch('https://data.messari.io/api/v1/assets/bitcoin/metrics')
+  .then(response => response.json())
+  .then(data => console.log(data)
+  );
+
+
+
+
+      let fiat = document.getElementById("fiat")
+      fiat.onclick = function doinIt(){
+//document.getElementById("content").innerHTML='<object type="text/html" data="htmlpage2.html" ////></object>';
+
+            console.log("doin it")
+            alert("stop spamming. ty.")
+      }
+      document.body.onload = addElement;
+let history = document.getElementById("Trade History")
+history.onclick = function historyClicked(){
+  addElement()
+}
+
+
+function addElement () {
+  // create a new div element
+  const newDiv = document.createElement("div");
+  const newestDiv = document.createElement("div");
+console.log(`weve just added an element for you`)
+
+  // and give it some content
+  const newContent = document.createTextNode(newestDiv);
+
+  const newestContent = document.createTextNode(" Hi there and even moar greetings!");
+
+
+  // add the text node to the newly created div
+  newDiv.appendChild(newContent);
+  newestDiv.appendChild(newestContent);
+
+
+  // add the newly created element and its content into the DOM
+  const currentDiv = document.getElementById("div1");
+  document.body.insertBefore(newDiv, currentDiv);
+}
+    //  import { start, User, authenticate } from 'moralis/node';
+    let trades = document.getElementById("trades")
+    trades.onclick = function doSomething(){
+
+      console.log("doin something with the trades button ")
+
+
+
+    }
+      const serverUrl = "https://0pdrrvslkpsk.usemoralis.com:2053/server";
+      const appId = "WfG94sZZpmzFgiwiNNQpoie1fgTXvDjI04AWdSAD";
+      Moralis.start({ serverUrl, appId });
+      const user =  Moralis.authenticate({ 
+        provider: "walletconnect", 
+        mobileLinks: [
+          "rainbow",
+          "metamask",
+          "argent",
+          "trust",
+          "imtoken",
+          "pillar",
+        ] 
+    })
+      
+          let loginButton = document.getElementById('btn-login')
+          let logoutButton = document.getElementById('btn-logout')
+          let dashboard = document.getElementById('dashboard')
+trades.onclick = function tradeClick() {
+
+        console.log("toilet")
+        alert("vintogas hamelech")
+}
+let portfolio = document.getElementById("portfolio")
+portfolio.onclick =  myPortfolio() 
+
+            function myPortfolio(){
+
+                console.log("myPortfolio clicked!")
+                    
+            }
+          logoutButton.onclick = function onClickLogout() {
+
+            logoutButton.textContent = "Sign out";
+            logoutButton.style = "Color: blue";
+            console.log("this button has also been clicked sire.")
+            console.log("Logout has commenced sire ")
+
+           logOut()
+
+          }
+          const list = document.getElementById("list");
+
+          //list.innerHTML += `<li><a href="#">Item ${list.children.length + 1}</a></li>`;
+
+          loginButton.onclick = function onClickLogin() {
+
+            loginButton.textContent = "Welcome";
+            loginButton.style = "Color: red";
+              console.log("this button has been clicked sire.")
+
+            
+            
+              Moralis.authenticate().then(function (user) {
+                console.log(user.get('ethAddress'))
+                login()
+
+                            })
+          }
+        const sendFundsButton = document.getElementById("sendFunds")
+        sendFundsButton.onclick=sendFunds()
+
+//add validation for number and so on.
+
+ function sendFunds(){
+    console.log('money is being sent...')
+    const   amountToSend = document.getElementById("amountToSend").value;
+    const rcvrAddress = document.getElementById("rcvrAddress").value;
+    console.log(`rcvr addr -->${rcvrAddress}`)
+    console.log(`amount -->${amountToSend}`)
+const options = {type: "native", amount: Moralis.Units.ETH(amountToSend), 
+                    receiver: rcvrAddress}
+let result =  Moralis.transfer(options)
+
+
+}
+
+
+
+async function login() {
+  let user = User.current();
+  if (!user) {
+    user = authenticate({ signingMessage: "Log in using Moralis" })
+      .then(function (user) {
+        console.log("logged in user:", user);
+        console.log(user.get("ethAddress"));
+      })
+      .catch(function (error) {
+        console(error);
+      });
+  }
+}
+
+async function logOut() {
+  console.log("started logging out")
+  await User.logOut();
+  console.log("logged out");
+  
+}
+
+
+
+class MoralisTorusProvider {
+
+    torus = new Torus({}) 
+    
+    async activate() {
+
+        this.provider = await this.torus.init(
+            {
+                enableLogging: true,
+                network: {
+                    host: "<YOUR BINANCE SPEEDY NODE>",
+                    networkName: "Smart Chain - Testnet",
+                    chainId: 97,
+                    blockExplorer: "https://testnet.bscscan.com",
+                    ticker: 'BNB',
+                    tickerName: 'BNB',
+                },
+            })
+        await this.torus.login();
+        
+        const MWeb3 = typeof Web3 === 'function' ? Web3 : window.Web3;
+        this.web3 = new MWeb3(this.torus.provider);
+        this.isActivated = true;
+
+        return this.web3;
+    }
+}
+
+
+
+        </script>
+
+
+        <style>
+            body {
+                background-image: url("https://rekt-dev.github.io/assets/img/demo-image-02.jpg");
+                background-color: #cccccc;
+               }
+
+          @import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,300,700,500,400italic,500italic,700italic,300italic);
+          .myDiv {
+            border: 5px outset red;
+            background-color: lightblue;
+            text-align: center;
+    
+          body{
+              background: #2C3940;
+              overflow:hidden;
+              font-family: 'Fira Sans', sans-serif;
+              a{
+                  color:white;
+                  padding-top:20px;
+                  font-size:10px;
+                  opacity:0.6;
+                  position:relative;
+                  top:10px;
+                  transition:all .3s;
+                  font-weight:100;
+                  text-decoration:none;
+                  &:hover{
+                      opacity:1;
+          
+                  }
+                  i.l{
+                      margin-right:3px;
+                  }
+              }
+          }
+          input{
+              display:none;
+          }
+          
+          input:checked + label{
+              .button_inner{
+                  background:transparent;
+                  transform:rotate(90deg);
+                  width:100px;
+                  border-radius:100px;
+                  box-shadow:0px 0px 0px 440px rgba(0,0,0,0);
+                  animation: finalbox .4s 4.42s cubic-bezier(0.39, 2.01, 0.27, 0.75) forwards;
+                  span.t{
+                      opacity:0;
+                      top:20px;
+                  }
+              }
+              i.l{
+                  left:14px;
+                  opacity:1;
+                  top:11px;
+                  animation:down 1s .25s infinite,final .2s 4s forwards;
+              }
+              .tick{
+                  position: absolute;
+                  left: 2px;
+                  right: 0;
+                  transform:scale(0) rotate(-90deg);
+                  color: #00C1FC;
+                  top: 11px;
+                  margin: auto;
+                  font-size: 22px;
+                  animation: tick .3s 4.7s forwards;
+              }
+              .button_spots{
+                  opacity:1;
+                  @for $i from 0 through 60{
+                      &:nth-of-type(#{$i}){
+                          top:(16px - random(10)) - 0 !important;
+                          left:-34px  !important;
+                          opacity:0;
+                          padding:random(20)/4 + 2 + px !important;
+                          animation:spew 1s .3s forwards,rotate 4s + random(4)/10 .25s + random(12)/10 linear infinite ,final .2s 4s forwards,spot-#{$i} .7s .4/random(10) + random(10)/10 + 10s linear infinite !important;
+                      }
+                  }
+          
+              }
+          }
+          .tick{
+              position:absolute;
+              left:-40;
+              right:0;
+              transform:scale(0);
+              margin:auto;
+              font-size:22px;
+          }
+         
+              h2{
+                  font-weight:100;
+                  color:#00C4FF;
+                  opacity:1;
+                  font-size:14px;
+                  margin:4px 0px 0px 0px;
+              }
+              .b_l_quad .button_spots{
+                  @for $i from 1 through 20{
+                      &:nth-child(#{$i}){
+                          padding:random(3) + 2 + px;
+                          left: -25 + ($i * 12) + px;
+                          top: 50 + px;
+                      }
+                  }
+                  @for $i from 20 through 40{
+                      &:nth-child(#{$i}){
+                          padding:random(3) + 2 + px;
+                          left: -255 + ($i * 12) + px;
+                          top: -12 + px;
+                      }
+                  }
+                  @for $i from 40 through 46{
+                      &:nth-child(#{$i}){
+                          padding:random(3) + 2 + px;
+                          left: 204px;
+                          top: -488 + ($i * 12) + px;
+                      }
+                  }
+          
+                  @for $i from 46 through 52{
+                      &:nth-child(#{$i}){
+                          padding:random(3) + 2 + px;
+                          left: -10px;
+                          top: -568 + ($i * 12) + px;
+                      }
+                  }
+              }
+              .button_spots{
+                  position:absolute;
+                  border-radius:100px;
+                  background:green;
+                  opacity:0;
+                  animation:opacity 1s;
+                  @for $i from 1 through 52{
+                      &:nth-of-type(#{$i}){
+                          transform-origin:90px - random(10) 20px - random(10);
+                          background:hsla(350 + random(399) ,57% - random(10) ,65%,1);
+                          box-shadow:0px 0px 10px rgba(255,255,255,0.12);
+                          transition:all 1s + random(10)/10;
+                      }
+                  }
+              }
+              &_inner{
+                  //overflow:hidden;
+                  border-radius:2px;
+                  position:absolute;
+                  width:200px;
+                  height:50px;
+                  left:0;
+                  right:0;
+                  top:50%;
+                  margin:auto;
+                  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.04);
+                  font-weight: 100;
+                  font-size: 12px;
+                  cursor:pointer;
+                  border: 2px solid #FFFFFF;
+                  color: white;
+                  text-align: Center;
+                  transition:all .3s,box-shadow .2s,transform .2s .2s;
+                  span.t{
+                      position:relative;
+                      top:6px;
+                      opacity:1;
+                      left:-10px;
+                      transition:left .4s .1s;
+          
+          
+                  }
+                  i.l{
+                      position: relative;
+                      left: -19px;
+                      top: 20px;
+                      color: #00C4FF;
+                      font-size: 25px;
+                      opacity: 0;
+                      transition: left .3s 0s,top .3s 0s,opacity .3s 0s;
+                  }
+                  &:hover{
+                      color:#2C3940;
+                      background: white;
+                      box-shadow: 0px 17px 18px -14px rgba(0, 0, 0, 0.08);
+                      span.t{
+                          left:16px;
+                          transition:left .4s;
+                      }
+                      i.l{
+                          top:12px;
+                          opacity:1;
+                          transition: left .3s 0s,top .3s .1s,opacity .3s .1s;
+                      }
+                  }
+                  &:hover .button_spots{
+                      @for $i from 1 through 19{
+                          &:nth-of-type(#{$i}){
+                              animation: spot-#{$i} .7s .4/random(10) + random(10)/10 + s linear infinite;
+                          }
+                      }
+                      @for $i from 20 through 40{
+                          &:nth-of-type(#{$i}){
+                              animation: spot-#{$i} .7s .4/random(10) + random(10)/10 + s linear infinite;
+                          }
+                      }
+                      @for $i from 40 through 46{
+                          &:nth-of-type(#{$i}){
+                              animation: spot-#{$i} .7s .4/random(10) + random(10)/10 + s linear infinite;
+                          }
+                      }
+                      @for $i from 46 through 54{
+                          &:nth-of-type(#{$i}){
+                              animation: spot-#{$i} .7s .4/random(10) + random(10)/10 + s linear infinite;
+                          }
+                      }
+                  }
+              }
+          }
+          
+          body {
+            background-color: linen;
+          }
+          
+          h1 {
+            color: maroon;
+            margin-left: 3px;
+          } 
+          h2{
+
+
+color:black
+
+
+          }
+
+
+          </style>
+  </body>
+</html>

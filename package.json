@@ -1,0 +1,19 @@
+{
+  "type": "module",
+  "name": "moralis_crypto_app",
+  "version": "1.6.66",
+  "description": "such a gr8 app.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web3"
+  ],
+  "author": "rektDev",
+  "license": "MIT",
+  "dependencies": {
+    "no-ip": "^1.0.2",
+    "nodemon": "^2.0.15"
+  }
+}
